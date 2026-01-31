@@ -34,6 +34,18 @@ export function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [setActiveSection]);
 
+  // Apply theme class to html element
+  useEffect(() => {
+    const html = document.documentElement;
+    if (isDark) {
+      html.classList.remove("light");
+      html.classList.add("dark");
+    } else {
+      html.classList.remove("dark");
+      html.classList.add("light");
+    }
+  }, [isDark]);
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -48,7 +60,9 @@ export function Navigation() {
         className={cn(
           "fixed left-0 right-0 top-0 z-50 transition-all duration-300",
           isScrolled
-            ? "bg-slate-900/80 backdrop-blur-xl border-b border-white/10"
+            ? isDark
+              ? "bg-slate-900/80 backdrop-blur-xl border-b border-white/10"
+              : "bg-white/80 backdrop-blur-xl border-b border-slate-200/50 shadow-sm"
             : "bg-transparent",
         )}
         initial={{ y: -100, opacity: 0 }}
@@ -59,14 +73,14 @@ export function Navigation() {
           {/* Logo */}
           <motion.a
             href="#hero"
-            className="text-xl font-bold text-white"
+            className={`text-xl font-bold ${isDark ? "text-white" : "text-slate-900"}`}
             whileHover={{ scale: 1.05 }}
             onClick={(e) => {
               e.preventDefault();
               scrollToSection("hero");
             }}
           >
-            <span className="bg-gradient-to-r from-violet-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-violet-500 to-purple-500 bg-clip-text text-transparent">
               NHN
             </span>
           </motion.a>
@@ -80,15 +94,19 @@ export function Navigation() {
                 className={cn(
                   "relative rounded-full px-4 py-2 text-sm font-medium transition-colors",
                   activeSection === item.id
-                    ? "text-white"
-                    : "text-white/60 hover:text-white",
+                    ? isDark
+                      ? "text-white"
+                      : "text-slate-900"
+                    : isDark
+                      ? "text-white/60 hover:text-white"
+                      : "text-slate-600 hover:text-slate-900",
                 )}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
               >
                 {activeSection === item.id && (
                   <motion.div
-                    className="absolute inset-0 rounded-full bg-white/10"
+                    className={`absolute inset-0 rounded-full ${isDark ? "bg-white/10" : "bg-slate-100"}`}
                     layoutId="activeSection"
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                   />
@@ -103,7 +121,11 @@ export function Navigation() {
             {/* Theme toggle */}
             <motion.button
               onClick={toggleTheme}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white/70 transition-colors hover:bg-white/10 hover:text-white"
+              className={`flex h-10 w-10 items-center justify-center rounded-full border transition-colors ${
+                isDark
+                  ? "border-white/10 bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
+                  : "border-slate-200 bg-white/70 text-slate-600 hover:bg-slate-100 hover:text-slate-900 shadow-sm"
+              }`}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
@@ -135,7 +157,11 @@ export function Navigation() {
             {/* Mobile menu button */}
             <motion.button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white md:hidden"
+              className={`flex h-10 w-10 items-center justify-center rounded-full border md:hidden ${
+                isDark
+                  ? "border-white/10 bg-white/5 text-white"
+                  : "border-slate-200 bg-white/70 text-slate-700 shadow-sm"
+              }`}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
@@ -184,7 +210,9 @@ export function Navigation() {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            className="fixed inset-0 z-40 bg-slate-900/95 backdrop-blur-xl md:hidden"
+            className={`fixed inset-0 z-40 backdrop-blur-xl md:hidden ${
+              isDark ? "bg-slate-900/95" : "bg-white/95"
+            }`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -198,8 +226,10 @@ export function Navigation() {
                   className={cn(
                     "text-2xl font-medium transition-colors",
                     activeSection === item.id
-                      ? "text-violet-400"
-                      : "text-white/60 hover:text-white",
+                      ? "text-violet-500"
+                      : isDark
+                        ? "text-white/60 hover:text-white"
+                        : "text-slate-600 hover:text-slate-900",
                   )}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}

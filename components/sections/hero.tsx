@@ -11,8 +11,11 @@ import {
 } from "lucide-react";
 import { personalInfo } from "@/lib/data";
 import { GradientText } from "@/components/ui/glass-card";
+import { useThemeStore } from "@/lib/store";
 
 export function HeroSection() {
+  const { isDark } = useThemeStore();
+
   const scrollToAbout = () => {
     document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
   };
@@ -25,13 +28,17 @@ export function HeroSection() {
       <div className="mx-auto max-w-5xl text-center">
         {/* Animated avatar placeholder */}
         <motion.div
-          className="mx-auto mb-8 flex h-32 w-32 items-center justify-center rounded-full border-2 border-violet-500/50 bg-gradient-to-br from-violet-500/20 to-purple-500/20 backdrop-blur-sm"
+          className={`mx-auto mb-8 flex h-32 w-32 items-center justify-center rounded-full border-2 backdrop-blur-sm ${
+            isDark
+              ? "border-violet-500/50 bg-gradient-to-br from-violet-500/20 to-purple-500/20"
+              : "border-violet-400 bg-gradient-to-br from-violet-100 to-purple-100 shadow-lg"
+          }`}
           initial={{ scale: 0, rotate: -180 }}
           animate={{ scale: 1, rotate: 0 }}
           transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
         >
           <motion.span
-            className="text-5xl font-bold text-violet-400"
+            className={`text-5xl font-bold ${isDark ? "text-violet-400" : "text-violet-600"}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
@@ -50,7 +57,9 @@ export function HeroSection() {
           animate={{ opacity: 1 }}
         >
           <motion.h1
-            className="mb-4 text-5xl font-bold tracking-tight text-white md:text-7xl lg:text-8xl"
+            className={`mb-4 text-5xl font-bold tracking-tight md:text-7xl lg:text-8xl ${
+              isDark ? "text-white" : "text-slate-900"
+            }`}
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{
@@ -78,19 +87,27 @@ export function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
-          <span className="inline-block rounded-full border border-violet-500/30 bg-violet-500/10 px-6 py-2 text-lg font-medium text-violet-300 backdrop-blur-sm md:text-xl">
+          <span
+            className={`inline-block rounded-full border px-6 py-2 text-lg font-medium backdrop-blur-sm md:text-xl ${
+              isDark
+                ? "border-violet-500/30 bg-violet-500/10 text-violet-300"
+                : "border-violet-300 bg-violet-100/80 text-violet-700 shadow-sm"
+            }`}
+          >
             {personalInfo.title}
           </span>
         </motion.div>
 
         {/* Experience badge */}
         <motion.p
-          className="mb-8 text-xl text-white/60 md:text-2xl"
+          className={`mb-8 text-xl md:text-2xl ${isDark ? "text-white/60" : "text-slate-600"}`}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.7 }}
         >
-          <span className="text-violet-400 font-semibold">
+          <span
+            className={`font-semibold ${isDark ? "text-violet-400" : "text-violet-600"}`}
+          >
             {personalInfo.yearsOfExperience}+
           </span>{" "}
           Years of Professional Experience
@@ -105,32 +122,50 @@ export function HeroSection() {
         >
           <a
             href={`mailto:${personalInfo.email}`}
-            className="group flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/70 backdrop-blur-sm transition-all duration-300 hover:border-violet-500/50 hover:bg-violet-500/10 hover:text-white"
+            className={`group flex items-center gap-2 rounded-full border px-4 py-2 text-sm backdrop-blur-sm transition-all duration-300 ${
+              isDark
+                ? "border-white/10 bg-white/5 text-white/70 hover:border-violet-500/50 hover:bg-violet-500/10 hover:text-white"
+                : "border-slate-200 bg-white/70 text-slate-600 shadow-sm hover:border-violet-400 hover:bg-violet-50 hover:text-violet-700"
+            }`}
           >
-            <Mail className="h-4 w-4 text-violet-400 transition-transform group-hover:scale-110" />
+            <Mail
+              className={`h-4 w-4 transition-transform group-hover:scale-110 ${isDark ? "text-violet-400" : "text-violet-500"}`}
+            />
             {personalInfo.email}
           </a>
           <a
             href={`tel:${personalInfo.phone}`}
-            className="group flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/70 backdrop-blur-sm transition-all duration-300 hover:border-violet-500/50 hover:bg-violet-500/10 hover:text-white"
+            className={`group flex items-center gap-2 rounded-full border px-4 py-2 text-sm backdrop-blur-sm transition-all duration-300 ${
+              isDark
+                ? "border-white/10 bg-white/5 text-white/70 hover:border-violet-500/50 hover:bg-violet-500/10 hover:text-white"
+                : "border-slate-200 bg-white/70 text-slate-600 shadow-sm hover:border-violet-400 hover:bg-violet-50 hover:text-violet-700"
+            }`}
           >
-            <Phone className="h-4 w-4 text-violet-400 transition-transform group-hover:scale-110" />
+            <Phone
+              className={`h-4 w-4 transition-transform group-hover:scale-110 ${isDark ? "text-violet-400" : "text-violet-500"}`}
+            />
             {personalInfo.phone}
           </a>
           <a
             href={personalInfo.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/70 backdrop-blur-sm transition-all duration-300 hover:border-violet-500/50 hover:bg-violet-500/10 hover:text-white"
+            className={`group flex items-center gap-2 rounded-full border px-4 py-2 text-sm backdrop-blur-sm transition-all duration-300 ${
+              isDark
+                ? "border-white/10 bg-white/5 text-white/70 hover:border-violet-500/50 hover:bg-violet-500/10 hover:text-white"
+                : "border-slate-200 bg-white/70 text-slate-600 shadow-sm hover:border-violet-400 hover:bg-violet-50 hover:text-violet-700"
+            }`}
           >
-            <Linkedin className="h-4 w-4 text-violet-400 transition-transform group-hover:scale-110" />
+            <Linkedin
+              className={`h-4 w-4 transition-transform group-hover:scale-110 ${isDark ? "text-violet-400" : "text-violet-500"}`}
+            />
             LinkedIn
           </a>
         </motion.div>
 
         {/* Additional info */}
         <motion.div
-          className="flex flex-wrap justify-center gap-6 text-sm text-white/50"
+          className={`flex flex-wrap justify-center gap-6 text-sm ${isDark ? "text-white/50" : "text-slate-500"}`}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 1.1 }}
@@ -148,7 +183,11 @@ export function HeroSection() {
         {/* Scroll indicator */}
         <motion.button
           onClick={scrollToAbout}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/40 transition-colors hover:text-violet-400"
+          className={`absolute bottom-10 left-1/2 -translate-x-1/2 transition-colors ${
+            isDark
+              ? "text-white/40 hover:text-violet-400"
+              : "text-slate-400 hover:text-violet-500"
+          }`}
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.3 }}
@@ -165,19 +204,25 @@ export function HeroSection() {
       {/* Decorative elements */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <motion.div
-          className="absolute left-10 top-1/4 h-px w-32 bg-gradient-to-r from-transparent via-violet-500/50 to-transparent"
+          className={`absolute left-10 top-1/4 h-px w-32 bg-gradient-to-r from-transparent to-transparent ${
+            isDark ? "via-violet-500/50" : "via-violet-400/40"
+          }`}
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, delay: 1.5 }}
         />
         <motion.div
-          className="absolute right-10 top-1/3 h-px w-48 bg-gradient-to-r from-transparent via-purple-500/50 to-transparent"
+          className={`absolute right-10 top-1/3 h-px w-48 bg-gradient-to-r from-transparent to-transparent ${
+            isDark ? "via-purple-500/50" : "via-purple-400/40"
+          }`}
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, delay: 1.7 }}
         />
         <motion.div
-          className="absolute bottom-1/4 left-20 h-32 w-px bg-gradient-to-b from-transparent via-indigo-500/30 to-transparent"
+          className={`absolute bottom-1/4 left-20 h-32 w-px bg-gradient-to-b from-transparent to-transparent ${
+            isDark ? "via-indigo-500/30" : "via-indigo-400/30"
+          }`}
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1.9 }}

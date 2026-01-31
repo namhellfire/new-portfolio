@@ -1,8 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useThemeStore } from "@/lib/store";
 
 export function AnimatedBackground() {
+  const { isDark } = useThemeStore();
+
+  if (!isDark) {
+    return <AnimatedBackgroundLight />;
+  }
+
   return (
     <div className="fixed inset-0 -z-10 overflow-hidden">
       {/* Base gradient */}
@@ -84,15 +91,15 @@ export function AnimatedBackground() {
   );
 }
 
-export function AnimatedBackgroundLight() {
+function AnimatedBackgroundLight() {
   return (
-    <div className="fixed inset-0 -z-10 overflow-hidden">
-      {/* Base gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-slate-100" />
+    <div className="fixed inset-0 -z-10 overflow-hidden transition-colors duration-500">
+      {/* Base gradient - Light */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-violet-50/30" />
 
-      {/* Animated gradient orbs */}
+      {/* Animated gradient orbs - softer for light mode */}
       <motion.div
-        className="absolute -top-40 -right-40 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-violet-400/20 to-purple-400/10 blur-[100px]"
+        className="absolute -top-40 -right-40 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-violet-300/40 to-purple-300/30 blur-[100px]"
         animate={{
           x: [0, 50, 0],
           y: [0, 30, 0],
@@ -106,7 +113,7 @@ export function AnimatedBackgroundLight() {
       />
 
       <motion.div
-        className="absolute -bottom-40 -left-40 h-[600px] w-[600px] rounded-full bg-gradient-to-tr from-blue-400/15 to-cyan-400/10 blur-[120px]"
+        className="absolute -bottom-40 -left-40 h-[600px] w-[600px] rounded-full bg-gradient-to-tr from-blue-300/30 to-cyan-300/20 blur-[120px]"
         animate={{
           x: [0, -30, 0],
           y: [0, -50, 0],
@@ -119,12 +126,25 @@ export function AnimatedBackgroundLight() {
         }}
       />
 
-      {/* Grid pattern */}
+      <motion.div
+        className="absolute top-1/2 left-1/2 h-[400px] w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-indigo-200/30 to-violet-200/20 blur-[80px]"
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.3, 0.5, 0.3],
+        }}
+        transition={{
+          duration: 12,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+
+      {/* Grid pattern - Light */}
       <div
         className="absolute inset-0 opacity-[0.03]"
         style={{
-          backgroundImage: `linear-gradient(rgba(0,0,0,.1) 1px, transparent 1px),
-                           linear-gradient(90deg, rgba(0,0,0,.1) 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(rgba(99,102,241,.15) 1px, transparent 1px),
+                           linear-gradient(90deg, rgba(99,102,241,.15) 1px, transparent 1px)`,
           backgroundSize: "50px 50px",
         }}
       />

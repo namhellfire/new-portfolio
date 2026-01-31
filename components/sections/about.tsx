@@ -1,12 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { professionalProfile, personalInfo } from "@/lib/data";
+import { professionalProfile } from "@/lib/data";
 import { GlassCard, SectionTitle } from "@/components/ui/glass-card";
 import { MotionWrapper } from "@/components/ui/motion-wrapper";
 import { Sparkles, Target, Rocket } from "lucide-react";
+import { useThemeStore } from "@/lib/store";
 
 export function AboutSection() {
+  const { isDark } = useThemeStore();
+
   const highlights = [
     {
       icon: Sparkles,
@@ -43,10 +46,14 @@ export function AboutSection() {
             className="flex flex-col justify-center"
           >
             <GlassCard hover={false} className="h-full">
-              <h3 className="mb-4 text-xl font-semibold text-white">
+              <h3
+                className={`mb-4 text-xl font-semibold ${isDark ? "text-white" : "text-slate-900"}`}
+              >
                 Professional Profile
               </h3>
-              <p className="leading-relaxed text-white/70">
+              <p
+                className={`leading-relaxed ${isDark ? "text-white/70" : "text-slate-600"}`}
+              >
                 {professionalProfile}
               </p>
 
@@ -60,7 +67,11 @@ export function AboutSection() {
                 ].map((tech) => (
                   <motion.span
                     key={tech}
-                    className="rounded-full bg-violet-500/10 px-3 py-1 text-sm text-violet-300 border border-violet-500/20"
+                    className={`rounded-full px-3 py-1 text-sm border ${
+                      isDark
+                        ? "bg-violet-500/10 text-violet-300 border-violet-500/20"
+                        : "bg-violet-100 text-violet-700 border-violet-200"
+                    }`}
                     whileHover={{ scale: 1.05 }}
                   >
                     {tech}
@@ -80,14 +91,26 @@ export function AboutSection() {
               >
                 <GlassCard glow glowColor="violet">
                   <div className="flex items-start gap-4">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-violet-500/20 to-purple-500/20">
-                      <item.icon className="h-6 w-6 text-violet-400" />
+                    <div
+                      className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl ${
+                        isDark
+                          ? "bg-gradient-to-br from-violet-500/20 to-purple-500/20"
+                          : "bg-gradient-to-br from-violet-100 to-purple-100"
+                      }`}
+                    >
+                      <item.icon
+                        className={`h-6 w-6 ${isDark ? "text-violet-400" : "text-violet-600"}`}
+                      />
                     </div>
                     <div>
-                      <h4 className="mb-1 font-semibold text-white">
+                      <h4
+                        className={`mb-1 font-semibold ${isDark ? "text-white" : "text-slate-900"}`}
+                      >
                         {item.title}
                       </h4>
-                      <p className="text-sm text-white/60">
+                      <p
+                        className={`text-sm ${isDark ? "text-white/60" : "text-slate-600"}`}
+                      >
                         {item.description}
                       </p>
                     </div>
@@ -114,15 +137,21 @@ export function AboutSection() {
           ].map((stat, index) => (
             <motion.div
               key={stat.label}
-              className="rounded-2xl border border-white/10 bg-white/5 p-6 text-center backdrop-blur-sm"
+              className={`rounded-2xl border p-6 text-center backdrop-blur-sm ${
+                isDark
+                  ? "border-white/10 bg-white/5"
+                  : "border-slate-200 bg-white/70 shadow-sm"
+              }`}
               whileHover={{
                 scale: 1.05,
-                borderColor: "rgba(139, 92, 246, 0.3)",
+                borderColor: isDark
+                  ? "rgba(139, 92, 246, 0.3)"
+                  : "rgba(139, 92, 246, 0.5)",
               }}
               transition={{ duration: 0.2 }}
             >
               <motion.div
-                className="mb-2 bg-gradient-to-r from-violet-400 to-purple-400 bg-clip-text text-4xl font-bold text-transparent"
+                className="mb-2 bg-gradient-to-r from-violet-500 to-purple-500 bg-clip-text text-4xl font-bold text-transparent"
                 initial={{ scale: 0 }}
                 whileInView={{ scale: 1 }}
                 viewport={{ once: true }}
@@ -130,7 +159,11 @@ export function AboutSection() {
               >
                 {stat.value}
               </motion.div>
-              <div className="text-sm text-white/50">{stat.label}</div>
+              <div
+                className={`text-sm ${isDark ? "text-white/50" : "text-slate-500"}`}
+              >
+                {stat.label}
+              </div>
             </motion.div>
           ))}
         </motion.div>

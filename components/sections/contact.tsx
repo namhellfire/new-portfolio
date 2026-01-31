@@ -8,6 +8,7 @@ import {
   StaggerContainer,
   StaggerItem,
 } from "@/components/ui/motion-wrapper";
+import { useThemeStore } from "@/lib/store";
 import {
   Mail,
   Phone,
@@ -19,6 +20,8 @@ import {
 } from "lucide-react";
 
 export function ContactSection() {
+  const { isDark } = useThemeStore();
+
   const contactItems = [
     {
       icon: Mail,
@@ -81,12 +84,28 @@ export function ContactSection() {
                       <item.icon className="h-6 w-6 text-white" />
                     </div>
                     <div className="flex-1">
-                      <p className="text-sm text-white/50">{item.label}</p>
-                      <p className="font-medium text-white group-hover:text-violet-300 transition-colors">
+                      <p
+                        className={`text-sm ${isDark ? "text-white/50" : "text-slate-500"}`}
+                      >
+                        {item.label}
+                      </p>
+                      <p
+                        className={`font-medium transition-colors ${
+                          isDark
+                            ? "text-white group-hover:text-violet-300"
+                            : "text-slate-900 group-hover:text-violet-600"
+                        }`}
+                      >
                         {item.value}
                       </p>
                     </div>
-                    <Send className="h-5 w-5 text-white/30 transition-all duration-300 group-hover:text-violet-400 group-hover:translate-x-1" />
+                    <Send
+                      className={`h-5 w-5 transition-all duration-300 group-hover:translate-x-1 ${
+                        isDark
+                          ? "text-white/30 group-hover:text-violet-400"
+                          : "text-slate-300 group-hover:text-violet-500"
+                      }`}
+                    />
                   </div>
                 </GlassCard>
               </a>
@@ -115,7 +134,11 @@ export function ContactSection() {
             </motion.a>
 
             <motion.button
-              className="group flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-8 py-4 font-medium text-white backdrop-blur-sm transition-all duration-300 hover:border-violet-500/50 hover:bg-violet-500/10"
+              className={`group flex items-center gap-2 rounded-full border px-8 py-4 font-medium backdrop-blur-sm transition-all duration-300 ${
+                isDark
+                  ? "border-white/20 bg-white/5 text-white hover:border-violet-500/50 hover:bg-violet-500/10"
+                  : "border-slate-300 bg-white/70 text-slate-700 shadow-sm hover:border-violet-400 hover:bg-violet-50 hover:text-violet-700"
+              }`}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -133,12 +156,20 @@ export function ContactSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
-          <div className="mb-4 h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-          <p className="flex items-center justify-center gap-2 text-sm text-white/40">
+          <div
+            className={`mb-4 h-px w-full bg-gradient-to-r from-transparent to-transparent ${
+              isDark ? "via-white/10" : "via-slate-200"
+            }`}
+          />
+          <p
+            className={`flex items-center justify-center gap-2 text-sm ${isDark ? "text-white/40" : "text-slate-500"}`}
+          >
             Made with <Heart className="h-4 w-4 text-pink-500" /> by Nguyen
             Hoang Nam
           </p>
-          <p className="mt-2 text-xs text-white/30">
+          <p
+            className={`mt-2 text-xs ${isDark ? "text-white/30" : "text-slate-400"}`}
+          >
             Built with Next.js 16, React 19, Tailwind CSS 4, Framer Motion &
             Zustand
           </p>

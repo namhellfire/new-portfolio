@@ -9,16 +9,38 @@
   /* Secondary Colors */
   --secondary: #8b5cf6;
   --accent: #06b6d4;
+}
 
-  /* Background - Dark Mode */
+/* Light Theme */
+.light {
+  --background: #fafafa;
+  --background-secondary: #f4f4f5;
+  --foreground: #18181b;
+  --foreground-muted: #71717a;
+
+  /* Glass Effects - Light */
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.08);
+
+  /* Card backgrounds */
+  --card-bg: rgba(255, 255, 255, 0.8);
+  --card-hover: rgba(255, 255, 255, 0.95);
+}
+
+/* Dark Theme */
+.dark {
   --background: #0a0a0f;
   --background-secondary: #111118;
   --foreground: #fafafa;
   --foreground-muted: #a1a1aa;
 
-  /* Glass Effects */
+  /* Glass Effects - Dark */
   --glass-bg: rgba(255, 255, 255, 0.05);
   --glass-border: rgba(255, 255, 255, 0.1);
+
+  /* Card backgrounds */
+  --card-bg: rgba(255, 255, 255, 0.05);
+  --card-hover: rgba(255, 255, 255, 0.1);
 }
 
 @theme inline {
@@ -42,30 +64,50 @@ body {
     -apple-system,
     sans-serif;
   overflow-x: hidden;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
+/* Custom scrollbar - Dark */
+.dark::-webkit-scrollbar {
   width: 8px;
 }
 
-::-webkit-scrollbar-track {
+.dark::-webkit-scrollbar-track {
   background: var(--background-secondary);
 }
 
-::-webkit-scrollbar-thumb {
+.dark::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, var(--primary), var(--secondary));
   border-radius: 4px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, var(--primary-light), var(--secondary));
+/* Custom scrollbar - Light */
+.light::-webkit-scrollbar {
+  width: 8px;
+}
+
+.light::-webkit-scrollbar-track {
+  background: #e4e4e7;
+}
+
+.light::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--primary), var(--secondary));
+  border-radius: 4px;
 }
 
 /* Selection */
 ::selection {
   background: rgba(139, 92, 246, 0.3);
+}
+
+.dark::selection {
   color: white;
+}
+
+.light::selection {
+  color: black;
 }
 
 /* Focus styles */
@@ -96,12 +138,20 @@ body {
 }
 
 /* Glow effects */
-.glow {
+.dark .glow {
   box-shadow: 0 0 40px rgba(139, 92, 246, 0.15);
 }
 
-.glow-hover:hover {
+.light .glow {
+  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.1);
+}
+
+.dark .glow-hover:hover {
   box-shadow: 0 0 60px rgba(139, 92, 246, 0.25);
+}
+
+.light .glow-hover:hover {
+  box-shadow: 0 8px 30px rgba(99, 102, 241, 0.15);
 }
 
 /* Custom animations */

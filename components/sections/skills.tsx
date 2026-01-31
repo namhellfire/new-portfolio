@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { technicalSkills } from "@/lib/data";
 import { SectionTitle, SkillBar, GlassCard } from "@/components/ui/glass-card";
 import { StaggerContainer, StaggerItem } from "@/components/ui/motion-wrapper";
+import { useThemeStore } from "@/lib/store";
 import {
   Code2,
   Palette,
@@ -32,6 +33,8 @@ const categoryColors: Record<string, string> = {
 };
 
 export function SkillsSection() {
+  const { isDark } = useThemeStore();
+
   return (
     <section id="skills" className="relative px-6 py-32">
       <div className="mx-auto max-w-7xl">
@@ -55,11 +58,13 @@ export function SkillsSection() {
                   <GlassCard className="h-full" glow>
                     <div className="mb-6 flex items-center gap-3">
                       <div
-                        className={`flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${gradient} bg-opacity-20`}
+                        className={`flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br ${gradient} ${isDark ? "bg-opacity-20" : ""}`}
                       >
                         <Icon className="h-5 w-5 text-white" />
                       </div>
-                      <h3 className="text-lg font-semibold text-white">
+                      <h3
+                        className={`text-lg font-semibold ${isDark ? "text-white" : "text-slate-900"}`}
+                      >
                         {category}
                       </h3>
                     </div>
@@ -103,11 +108,15 @@ export function SkillsSection() {
           ].map((tech, index) => (
             <motion.div
               key={tech}
-              className="rounded-xl border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/60 backdrop-blur-sm"
+              className={`rounded-xl border px-4 py-2 text-sm backdrop-blur-sm ${
+                isDark
+                  ? "border-white/10 bg-white/5 text-white/60"
+                  : "border-slate-200 bg-white/70 text-slate-600 shadow-sm"
+              }`}
               whileHover={{
                 scale: 1.1,
                 borderColor: "rgba(139, 92, 246, 0.5)",
-                color: "rgba(255, 255, 255, 0.9)",
+                color: isDark ? "rgba(255, 255, 255, 0.9)" : "rgb(91, 33, 182)",
               }}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
