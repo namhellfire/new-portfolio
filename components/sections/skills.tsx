@@ -111,7 +111,7 @@ export function SkillsSection() {
               className={`rounded-xl border px-4 py-2 text-sm backdrop-blur-sm ${
                 isDark
                   ? "border-white/10 bg-white/5 text-white/60"
-                  : "border-slate-200 bg-white/70 text-slate-600 shadow-sm"
+                  : "border-slate-200 bg-white/70 text-slate-600 shadow-sm text-black"
               }`}
               whileHover={{
                 scale: 1.1,
