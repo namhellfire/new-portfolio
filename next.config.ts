@@ -4,7 +4,8 @@ const nextConfig: NextConfig = {
   basePath: "/me",
   assetPrefix: "/me",
   images: {
-    unoptimized: true, // Required when using basePath to avoid image optimization API issues
+    formats: ["image/webp", "image/avif"],
+    deviceSizes: [640, 750, 828, 1080, 1200],
   },
 };
 

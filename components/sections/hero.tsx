@@ -51,7 +51,7 @@ export function HeroSection() {
               height={256}
               className="h-full w-full object-cover"
               priority
-              unoptimized
+              fetchPriority="high"
             />
           </motion.div>
         </motion.div>
