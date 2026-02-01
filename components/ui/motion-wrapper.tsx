@@ -58,7 +58,7 @@ export function MotionWrapper({
       className={cn(className)}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once, margin: "-100px" }}
+      viewport={{ once, amount: 0.1 }}
       variants={variants[variant]}
       transition={{
         duration,
@@ -89,7 +89,7 @@ export function StaggerContainer({
       className={cn(className)}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-50px" }}
+      viewport={{ once: true, amount: 0.1 }}
       variants={{
         hidden: {},
         visible: {
