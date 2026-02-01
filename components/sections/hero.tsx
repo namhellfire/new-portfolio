@@ -28,26 +28,23 @@ export function HeroSection() {
       <div className="mx-auto max-w-5xl text-center">
         {/* Animated avatar placeholder */}
         <motion.div
-          className={`mx-auto mb-8 flex h-32 w-32 items-center justify-center rounded-full border-2 backdrop-blur-sm ${
+          className={`mx-auto mb-8 h-64 w-64 overflow-hidden rounded-full border-2 ${
             isDark
-              ? "border-violet-500/50 bg-gradient-to-br from-violet-500/20 to-purple-500/20"
-              : "border-violet-400 bg-gradient-to-br from-violet-100 to-purple-100 shadow-lg"
+              ? "border-violet-500/50 shadow-lg shadow-violet-500/25"
+              : "border-violet-400 shadow-lg shadow-violet-300/50"
           }`}
           initial={{ scale: 0, rotate: -180 }}
           animate={{ scale: 1, rotate: 0 }}
           transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
         >
-          <motion.span
-            className={`text-5xl font-bold ${isDark ? "text-violet-400" : "text-violet-600"}`}
+          <motion.img
+            src="/avatar.jpg"
+            alt={personalInfo.name}
+            className="h-full w-full object-cover"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
-          >
-            {personalInfo.name
-              .split(" ")
-              .map((n) => n[0])
-              .join("")}
-          </motion.span>
+          />
         </motion.div>
 
         {/* Name with staggered animation */}
