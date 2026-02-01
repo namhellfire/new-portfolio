@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import {
   MapPin,
   Mail,
@@ -37,14 +38,21 @@ export function HeroSection() {
           animate={{ scale: 1, rotate: 0 }}
           transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
         >
-          <motion.img
-            src="/avatar.jpg"
-            alt={personalInfo.name}
-            className="h-full w-full object-cover"
+          <motion.div
+            className="h-full w-full"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
-          />
+          >
+            <Image
+              src="/avatar.jpg"
+              alt={personalInfo.name}
+              width={256}
+              height={256}
+              className="h-full w-full object-cover"
+              priority
+            />
+          </motion.div>
         </motion.div>
 
         {/* Name with staggered animation */}

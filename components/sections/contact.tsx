@@ -134,7 +134,7 @@ export function ContactSection() {
             </motion.a>
 
             <motion.a
-              href="/cv.pdf"
+              href="/me/cv.pdf"
               download="cv.pdf"
               target="_blank"
               rel="noopener noreferrer"
