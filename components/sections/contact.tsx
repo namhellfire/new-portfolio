@@ -133,7 +133,11 @@ export function ContactSection() {
               </motion.span>
             </motion.a>
 
-            <motion.button
+            <motion.a
+              href="/cv.pdf"
+              download="cv.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className={`group flex items-center gap-2 rounded-full border px-8 py-4 font-medium backdrop-blur-sm transition-all duration-300 ${
                 isDark
                   ? "border-white/20 bg-white/5 text-white hover:border-violet-500/50 hover:bg-violet-500/10"
@@ -144,7 +148,7 @@ export function ContactSection() {
             >
               <Download className="h-5 w-5" />
               Download CV
-            </motion.button>
+            </motion.a>
           </div>
         </MotionWrapper>
 

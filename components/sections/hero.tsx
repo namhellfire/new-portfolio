@@ -180,7 +180,7 @@ export function HeroSection() {
         {/* Scroll indicator */}
         <motion.button
           onClick={scrollToAbout}
-          className={`absolute bottom-10 left-1/2 -translate-x-1/2 transition-colors ${
+          className={`absolute bottom-10 left-1/2 -translate-x-1/2 transition-colors hover:cursor-pointer ${
             isDark
               ? "text-white/40 hover:text-violet-400"
               : "text-slate-400 hover:text-violet-500"
