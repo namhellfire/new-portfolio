@@ -135,7 +135,7 @@ export function ContactSection() {
 
             <motion.a
               href="/me/cv.pdf"
-              download="cv.pdf"
+              download="Nguyen Hoang Nam - FE Developer.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className={`group flex items-center gap-2 rounded-full border px-8 py-4 font-medium backdrop-blur-sm transition-all duration-300 ${
