@@ -45,12 +45,13 @@ export function HeroSection() {
             transition={{ delay: 0.5 }}
           >
             <Image
-              src="/avatar.jpg"
+              src="/me/avatar.jpg"
               alt={personalInfo.name}
               width={256}
               height={256}
               className="h-full w-full object-cover"
               priority
+              unoptimized
             />
           </motion.div>
         </motion.div>
